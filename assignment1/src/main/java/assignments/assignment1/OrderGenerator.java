@@ -105,9 +105,82 @@ public class OrderGenerator {
      */
     public static String generateBill(String OrderID, String lokasi){
         // TODO:Lengkapi method ini sehingga dapat mengenerate Bill sesuai ketentuan
-        return "Bill";
+        String bill = "";
+        String tanggalPemesanan = OrderID.substring(4,6)+"/"+OrderID.substring(6, 8)+"/"+OrderID.substring(8,12);
+        long ongkir=0;
+        lokasi = lokasi.toUpperCase();
+        switch(lokasi){
+            case "P": 
+                ongkir = 10000;
+                break;
+            case "U": 
+                ongkir = 20000;
+                break;
+            case "T": 
+                ongkir = 35000;
+                break;
+            case "S": 
+                ongkir = 40000;
+                break;
+            case "B": 
+                ongkir = 60000;
+                break;
+        }
+
+        bill += String.format("Bill:\nOrder ID: %s\nTanggal Pemesanan: %s\nLokasi Pengiriman: %s\nBiaya Ongkos Kirim: Rp %.3f\n", OrderID, tanggalPemesanan, lokasi, (float)ongkir/1000);
+        return bill;
     }
 
+
+    public static void menu2(){
+        System.out.print("Order ID: ");
+        String orderID= input.nextLine();        
+        if (orderID.length()!=16){
+            System.out.println("Order ID minimal 16 karakter");
+            menu2();
+        }
+        
+        int checksum1 = 0;
+        int checksum2 = 0;
+        boolean checker1 = true;
+        boolean checker2 = true;
+        for (int i = 0; i < orderID.length(); i++){
+            if (Character.isDigit(orderID.charAt(i))){
+                if (i%2 == 0){
+                    checksum1 += Character.getNumericValue(orderID.charAt(i));
+                }else{
+                    checksum2 += Character.getNumericValue(orderID.charAt(i));
+                }
+            }else{
+                if (i%2 == 0){ 
+                    checksum1 += ((int)orderID.charAt(i)-55);
+                }else{
+                    checksum2 += ((int)orderID.charAt(i)-55);
+                }
+            }
+        }
+        checker1 = (checksum1%36 == (int)orderID.charAt(14)); 
+        checker2 = (checksum2%36 == (int)orderID.charAt(15));
+        
+        if (!checker1 && !checker2){
+            System.out.println("Silahkan masukkan Order ID yang valid!");
+            menu2();
+        }
+        
+        System.out.print("Lokasi Pengiriman: ");
+        String lokPeng = input.nextLine();
+        lokPeng = lokPeng.toUpperCase();
+        while(!lokPeng.equals("P") || !lokPeng.equals("U") || 
+            !lokPeng.equals("T") || !lokPeng.equals("S") || 
+            !lokPeng.equals("B")){
+            
+            System.out.print("Lokasi Pengiriman: ");
+            lokPeng = input.nextLine();
+        }
+
+        String bill = generateBill(orderID, lokPeng);
+        System.out.println(bill);
+    }
     public static void menu1(){
         System.out.print("Nama Restoran: ");
         String namaRestoran = input.nextLine();
@@ -118,10 +191,9 @@ public class OrderGenerator {
         
         System.out.print("Tanggal Pemesanan: ");
         String tanggalPemesanan = input.nextLine();
-        if ((tanggalPemesanan.charAt(2)!='/') || (tanggalPemesanan.charAt(5)!='/')){
+        if ((tanggalPemesanan.charAt(2)!='/') || (tanggalPemesanan.charAt(5)!='/') || tanggalPemesanan.length()!=10){
             System.out.println("Tanggal Pemesanan dalam format DD/MM/YYYY!\n");
             menu1();
-            //kurang checker panjang
         }
 
         System.out.print("No. Telpon: ");
