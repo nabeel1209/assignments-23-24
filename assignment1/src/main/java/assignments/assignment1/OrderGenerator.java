@@ -1,6 +1,4 @@
 package assignments.assignment1;
-// import java.util.*;
-
 import java.util.Scanner;
 
 public class OrderGenerator {
@@ -126,25 +124,16 @@ public class OrderGenerator {
                 ongkir = 60000;
                 break;
         }
-
-        bill += String.format("Bill:\nOrder ID: %s\nTanggal Pemesanan: %s\nLokasi Pengiriman: %s\nBiaya Ongkos Kirim: Rp %.3f\n", OrderID, tanggalPemesanan, lokasi, (float)ongkir/1000);
+        bill += String.format("\nBill:\nOrder ID: %s\nTanggal Pemesanan: %s\nLokasi Pengiriman: %s\nBiaya Ongkos Kirim: Rp %.3f\n", OrderID, tanggalPemesanan, lokasi, (float)ongkir/1000);
         return bill;
     }
 
-
-    public static void menu2(){
-        System.out.print("Order ID: ");
-        String orderID= input.nextLine();        
-        if (orderID.length()!=16){
-            System.out.println("Order ID minimal 16 karakter");
-            menu2();
-        }
-        
+    public static boolean checkerPola(String orderID){
         int checksum1 = 0;
         int checksum2 = 0;
         boolean checker1 = true;
         boolean checker2 = true;
-        for (int i = 0; i < orderID.length(); i++){
+        for (int i = 0; i < orderID.length()-2; i++){
             if (Character.isDigit(orderID.charAt(i))){
                 if (i%2 == 0){
                     checksum1 += Character.getNumericValue(orderID.charAt(i));
@@ -159,54 +148,95 @@ public class OrderGenerator {
                 }
             }
         }
-        checker1 = (checksum1%36 == (int)orderID.charAt(14)); 
-        checker2 = (checksum2%36 == (int)orderID.charAt(15));
-        
-        if (!checker1 && !checker2){
-            System.out.println("Silahkan masukkan Order ID yang valid!");
-            menu2();
+        if(Character.isDigit(orderID.charAt(14))){
+            checker1 = (checksum1%36 == Character.getNumericValue(orderID.charAt(14)));
+        }else{
+            checker1 = (checksum1%36 == (int)orderID.charAt(14)-55);
         }
-        
+        if(Character.isDigit(orderID.charAt(15))){
+            checker2 = (checksum2%36 == Character.getNumericValue(orderID.charAt(15)));
+        }else{
+            checker2 = (checksum2%36 == (int)orderID.charAt(15)-55);
+        }
+
+        return !(checker1 && checker2);
+    }
+    public static void menu2(){
+        System.out.print("Order ID: ");
+        String orderID= input.nextLine();        
+        while (orderID.length()!=16){
+            System.out.println("Order ID minimal 16 karakter\n");
+            System.out.print("Order ID: ");
+            orderID= input.nextLine();
+        }
+        boolean cek = checkerPola(orderID);
+        while(cek){
+            System.out.println("Silahkan masukkan Order ID yang valid!\n");
+            System.out.print("Order ID: ");
+            orderID = input.nextLine();
+            while (orderID.length()!=16){
+                System.out.println("Order ID minimal 16 karakter\n");
+                System.out.print("Order ID: ");
+                orderID= input.nextLine();
+            }
+            cek = checkerPola(orderID);
+        }
         System.out.print("Lokasi Pengiriman: ");
         String lokPeng = input.nextLine();
         lokPeng = lokPeng.toUpperCase();
-        while(!lokPeng.equals("P") || !lokPeng.equals("U") || 
-            !lokPeng.equals("T") || !lokPeng.equals("S") || 
-            !lokPeng.equals("B")){
+        while(!(lokPeng.equals("P") || lokPeng.equals("U") || 
+            lokPeng.equals("T") || lokPeng.equals("S") || 
+            lokPeng.equals("B"))){
             
+            System.out.println("Harap masukkan lokasi pengiriman yang ada pada jangkauan!\n");
             System.out.print("Lokasi Pengiriman: ");
             lokPeng = input.nextLine();
+            lokPeng = lokPeng.toUpperCase();
         }
-
         String bill = generateBill(orderID, lokPeng);
         System.out.println(bill);
     }
+
     public static void menu1(){
         System.out.print("Nama Restoran: ");
         String namaRestoran = input.nextLine();
-        if (namaRestoran.length()<4){
+        if (namaRestoran.replaceAll(" ", "").length()<4){
             System.out.println("Harap masukkan nama restoran minimal 4 karakter\n");
             menu1();
         }
-        
+        else{
         System.out.print("Tanggal Pemesanan: ");
         String tanggalPemesanan = input.nextLine();
+        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        // try{
+        //     LocalDate.parse(tanggalPemesanan, formatter);
+        // }catch(Exception e){
+        //     System.out.println("Tanggal Pemesanan dalam format DD/MM/YYYY!\n");
+        //     menu1();
+        //     throw null;
+        // }
         if ((tanggalPemesanan.charAt(2)!='/') || (tanggalPemesanan.charAt(5)!='/') || tanggalPemesanan.length()!=10){
             System.out.println("Tanggal Pemesanan dalam format DD/MM/YYYY!\n");
             menu1();
-        }
-
-        System.out.print("No. Telpon: ");
-        String noTelp = input.nextLine();
-        for(int i = 0;i < noTelp.length();i++){ 
-            if(Character.isAlphabetic(noTelp.charAt(i))){
-                System.out.println("Harap masukkan nomor telepon dalam bentuk bilangan bulat positif\n");
-                menu1();
-                break;
+        }else{
+            boolean cek = true;
+            System.out.print("No. Telpon: ");
+            String noTelp = input.nextLine();
+            for(int i = 0;i < noTelp.length();i++){ 
+                if(!Character.isDigit(noTelp.charAt(i))){
+                    System.out.println("Harap masukkan nomor telepon dalam bentuk bilangan bulat positif\n");
+                    cek = false;
+                    break;
+                }
             }
-        }
-        String kode = generateOrderID(namaRestoran, tanggalPemesanan, noTelp);
-        System.out.println("OrderID "+ kode +" diterima!");
+            if (!cek){
+                menu1();
+            }else{
+                String kode = generateOrderID(namaRestoran, tanggalPemesanan, noTelp);
+                System.out.println("OrderID "+ kode +" diterima!");
+                }
+            }
+        }     
     }
     
     public static void main(String[] args) {
@@ -215,8 +245,8 @@ public class OrderGenerator {
         while(true){
             System.out.print("Pilihan menu: ");
             int menu = input.nextInt();
-            if (menu>3 || menu<1){
-                System.out.print("Pilihan menu tidak valid");
+            while (menu>3 || menu<1){
+                System.out.println("Pilihan menu tidak valid");
                 System.out.print("Pilihan menu: ");
                 menu = input.nextInt();
             }
@@ -224,7 +254,8 @@ public class OrderGenerator {
                 input.nextLine();
                 menu1();
             }else if (menu == 2){
-
+                input.nextLine();
+                menu2();
             }else if(menu == 3){
                 System.out.println("Terima kasih telah menggunakan DepeFood!");
                 break;
