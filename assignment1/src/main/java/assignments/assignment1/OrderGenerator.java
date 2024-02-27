@@ -124,7 +124,7 @@ public class OrderGenerator {
                 ongkir = 60000;
                 break;
         }
-        bill += String.format("\nBill:\nOrder ID: %s\nTanggal Pemesanan: %s\nLokasi Pengiriman: %s\nBiaya Ongkos Kirim: Rp %.3f\n", OrderID, tanggalPemesanan, lokasi, (float)ongkir/1000);
+        bill += String.format("Bill:\nOrder ID: %s\nTanggal Pemesanan: %s\nLokasi Pengiriman: %s\nBiaya Ongkos Kirim: Rp %.3f\n", OrderID, tanggalPemesanan, lokasi, (float)ongkir/1000);
         return bill;
     }
 
@@ -193,7 +193,7 @@ public class OrderGenerator {
             lokPeng = input.nextLine();
             lokPeng = lokPeng.toUpperCase();
         }
-        String bill = generateBill(orderID, lokPeng);
+        String bill = "\n"+generateBill(orderID, lokPeng);
         System.out.println(bill);
     }
 
