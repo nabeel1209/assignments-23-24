@@ -215,7 +215,7 @@ public class OrderGenerator {
         //     menu1();
         //     throw null;
         // }
-        if ((tanggalPemesanan.charAt(2)!='/') || (tanggalPemesanan.charAt(5)!='/') || tanggalPemesanan.length()!=10){
+        if ((tanggalPemesanan.charAt(2)!='/') || (tanggalPemesanan.charAt(5)!='/') || tanggalPemesanan.length()!=10||(Character.getNumericValue(tanggalPemesanan.charAt(3))*10+Character.getNumericValue(tanggalPemesanan.charAt(4)))>12){
             System.out.println("Tanggal Pemesanan dalam format DD/MM/YYYY!\n");
             menu1();
         }else{
