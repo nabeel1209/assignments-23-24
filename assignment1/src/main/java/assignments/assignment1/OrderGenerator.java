@@ -123,7 +123,7 @@ public class OrderGenerator {
                 ongkir = 60000;
                 break;
         }
-        bill += String.format("Bill:\nOrder ID: %s\nTanggal Pemesanan: %s\nLokasi Pengiriman: %s\nBiaya Ongkos Kirim: Rp %.3f", OrderID, tanggalPemesanan, lokasi, (float)ongkir/1000);
+        bill += String.format("Bill:\nOrder ID: %s\nTanggal Pemesanan: %s\nLokasi Pengiriman: %s\nBiaya Ongkos Kirim: Rp %.3f\n", OrderID, tanggalPemesanan, lokasi, (float)ongkir/1000);
         return bill;
     }
 
