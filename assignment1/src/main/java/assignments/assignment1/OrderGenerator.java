@@ -104,7 +104,7 @@ public class OrderGenerator {
         // TODO:Lengkapi method ini sehingga dapat mengenerate Bill sesuai ketentuan
         String bill = "";
         String tanggalPemesanan = OrderID.substring(4,6)+"/"+OrderID.substring(6, 8)+"/"+OrderID.substring(8,12); // Melakukan format pada String tanggal
-        long ongkir = 0; 
+        int ongkir = 0; 
         lokasi = lokasi.toUpperCase(); // Ubah lokasi menjadi UPPERCASE
         switch(lokasi){ // Percabangan dengan switch case sesuai ketentuan soal
             case "P": 
