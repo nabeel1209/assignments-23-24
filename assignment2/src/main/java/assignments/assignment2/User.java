@@ -1,4 +1,4 @@
-package main.java.assignments.assignment2;
+package assignments.assignment2;
 import java.util.ArrayList;
 
 public class User {
@@ -7,8 +7,8 @@ public class User {
     private String nomorTelepon;
     private String email;
     private String lokasi;
-    private String role;
-    private ArrayList<Order> orderHistory;
+    public String role;
+    private ArrayList<Order> orderHistory = new ArrayList<Order>();
 
     public User(String nama, String nomorTelepon, String email, String lokasi, String role){
         // TODO: buat constructor untuk class ini
@@ -24,10 +24,13 @@ public class User {
         return this.nama;
     }
     public String getNoTelepon(){
-        return this.getNoTelepon();
+        return this.nomorTelepon;
     }
     public String getLokasi(){
         return this.lokasi;
+    }
+    public String getEmail(){
+        return this.email;
     }
     public ArrayList<Order> getOrderHistory(){
         return this.orderHistory;
