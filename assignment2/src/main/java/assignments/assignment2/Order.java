@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 public class Order {
      // TODO: tambahkan attributes yang diperlukan untuk class ini
+     // Menggunakan modifier private karena data dalam objek order hanya dapat dilihat oleh 
+     // User sebagai pembuat pesanan dan Restoran sebagai penerima pesanan
     private String orderID;
     private String tanggalPemesanan;
     private int biayaOngkosKirim;
@@ -11,9 +13,8 @@ public class Order {
     public boolean orderFinished;
     private int totalBiaya;
 
-
+    // TODO: buat constructor untuk class ini
     public Order(String orderId, String tanggal, int ongkir, Restaurant resto, ArrayList<Menu> items){
-        // TODO: buat constructor untuk class ini
         this.orderID = orderId;
         this.tanggalPemesanan = tanggal;
         this.biayaOngkosKirim = ongkir;
@@ -22,6 +23,7 @@ public class Order {
     }
     
     // TODO: tambahkan methods yang diperlukan untuk class ini
+    // Membuat method setter dan getter karena data dari objek order bersifat private
     public String getOrderID(){
         return this.orderID;
     }
@@ -67,8 +69,8 @@ public class Order {
         this.totalBiaya = totalBiaya;
     }
 
+    // Menambahkan method generateOrderID pada objek order agar dapat membuat order id dari data yang dimilikinya
     public String generateOrderID(String noTelepon) {
-        // TODO:Lengkapi method ini sehingga dapat mengenerate Order ID sesuai ketentuan
         String hasil = "";
         hasil += this.restaurant.namaRestoran.substring(0, 4).toUpperCase(); // Indexing String namaRestoran sesuai ketentuan dan buat menjadi UPPERCASE lalu concat ke dalam String hasil
     
@@ -119,6 +121,7 @@ public class Order {
         return hasil;    
     }
     
+    // Melakukan override pada method toString yang dimiliki oleh class Object untuk menampilkan objek order
     @Override
     public String toString(){
         String hasil =  "Bill:\n"+
@@ -155,5 +158,4 @@ public class Order {
                     "Total Biaya: Rp "+this.totalBiaya;
         return hasil;
     }
-    // Implementasi methods
 }
