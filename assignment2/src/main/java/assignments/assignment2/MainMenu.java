@@ -218,7 +218,7 @@ public class MainMenu {
             System.out.println("Belum ada restoran yang terdaftar pada sistem!");
         }else{
             for (int i = 0; i<restoList.size(); i++){ // Mengecek apakah restoran terdaftar pada sistem
-                if(namaResto.equals(restoList.get(i).namaRestoran)){
+                if(namaResto.equalsIgnoreCase(restoList.get(i).namaRestoran)){
                     System.out.println(restoList.get(i).showMenu()); // Saat restoran terdaftar pada sistem
                     break;
                 }else if(i == restoList.size()-1){
