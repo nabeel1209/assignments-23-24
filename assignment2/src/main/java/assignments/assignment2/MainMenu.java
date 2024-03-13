@@ -99,9 +99,9 @@ public class MainMenu {
 
     public static User getUser(String nama, String nomorTelepon){
         // TODO: Implementasi method untuk mendapat user dari userList
-        for (int i = 0; i<userList.size();i++){
-            if (nama.equals(userList.get(i).getName()) && nomorTelepon.equals(userList.get(i).getNoTelepon())){
-                return userList.get(i); // Mereturn user saat user ditemukan dalam list user
+        for (User user : userList) {
+            if (nama.equals(user.getName()) && nomorTelepon.equals(user.getNoTelepon())) {
+                return user; // Mereturn user saat user ditemukan dalam list user
             }
         }
         return null; // Mereturn null saat user tidak ditemukan dalam list user
