@@ -261,8 +261,12 @@ public class MainMenu {
                         if(userLoggedIn.getOrderHistory().get(i).orderFinished == statusBool){ // Saat status pesanan sama dengan status yang diupdate
                             System.out.println("Status pesanan dengan ID "+userLoggedIn.getOrderHistory().get(i).getOrderID()+" tidak berhasil diupdate!\n");
                         }else{
-                            userLoggedIn.getOrderHistory().get(i).setOrderFinished(statusBool); // Saat status pesanan berbeda dengan status yang diupdate
-                            System.out.println("Status pesanan dengan ID "+userLoggedIn.getOrderHistory().get(i).getOrderID()+" berhasil diupdate!\n");
+                            if (!statusBool && userLoggedIn.getOrderHistory().get(i).orderFinished){ // Saat pesanan sudah selesai namun ingin diubah menjadi tidak selesai
+                                System.out.println("Status pesanan dengan ID "+userLoggedIn.getOrderHistory().get(i).getOrderID()+" tidak berhasil diupdate!\n");
+                            }else{
+                                userLoggedIn.getOrderHistory().get(i).setOrderFinished(statusBool); // Saat status pesanan berbeda dengan status yang diupdate
+                                System.out.println("Status pesanan dengan ID "+userLoggedIn.getOrderHistory().get(i).getOrderID()+" berhasil diupdate!\n");
+                            }
                         }
                         break;
                     }
