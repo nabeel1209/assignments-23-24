@@ -72,7 +72,6 @@ public class MainMenu {
                         input.nextLine();
 
                         switch(commandAdmin){
-<<<<<<< HEAD
                             case 1 : // Saat command admin adalah 1
                                 System.out.println("-----------Tambah Restoran-----------");
                                 handleTambahRestoran();
@@ -86,12 +85,6 @@ public class MainMenu {
                                 break;
                             default : // Saat command admin tidak ada pada sistem
                                 System.out.println("Perintah tidak diketahui, silakan coba kembali\n");
-=======
-                            case 1 -> handleTambahRestoran();
-                            case 2 -> handleHapusRestoran();
-                            case 3 -> isLoggedIn = false;
-                            default -> System.out.println("Perintah tidak diketahui, silakan coba kembali");
->>>>>>> 36b55a62b2b95bb51b1bbee92e9e492f05e50a61
                         }
                     }
                 }
