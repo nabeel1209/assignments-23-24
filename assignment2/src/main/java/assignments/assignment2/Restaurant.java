@@ -20,14 +20,30 @@ public class Restaurant {
     }
     public void sortMenu(){
         for (int i = 0; i<menu.size(); i++){
-            for (int j = menu.size()-1; i < j; j--){
+            for (int j = i+1; j<menu.size(); j++){
                 if (menu.get(i).harga > menu.get(j).harga){
-                    menu.set(i, menu.set(j, menu.get(i))); // Swap posisi saat harga berbeda
+                    Menu gantiI = menu.get(i);
+                    Menu gantiJ = menu.get(j);
+                    menu.set(i, gantiJ); 
+                    menu.set(j, gantiI);
                 }else if(menu.get(i).harga == menu.get(j).harga){ // Saat harga sama cek urutan alfabet
                     if(menu.get(i).namaMakanan.length() > menu.get(j).namaMakanan.length()){ 
-                        for(int a = 0; a<menu.get(j).namaMakanan.length(); a++){
+                        for(int a = 0; a < menu.get(j).namaMakanan.length(); a++){
                             if(menu.get(i).namaMakanan.charAt(a) > menu.get(j).namaMakanan.charAt(a)){
-                                menu.set(i, menu.set(j, menu.get(i))); // Swap posisi saat untuk sort berdasarkan alfabet
+                                Menu gantiI = menu.get(i);
+                                Menu gantiJ = menu.get(j);
+                                menu.set(i, gantiJ); 
+                                menu.set(j, gantiI);// Swap posisi saat untuk sort berdasarkan alfabet
+                                break;
+                            }
+                        }
+                    }else{
+                        for(int a = 0; a<menu.get(i).namaMakanan.length(); a++){
+                            if(menu.get(i).namaMakanan.charAt(a) > menu.get(j).namaMakanan.charAt(a)){
+                                Menu gantiI = menu.get(i);
+                                Menu gantiJ = menu.get(j);
+                                menu.set(i, gantiJ); 
+                                menu.set(j, gantiI);// Swap posisi saat untuk sort berdasarkan alfabet
                                 break;
                             }
                         }
