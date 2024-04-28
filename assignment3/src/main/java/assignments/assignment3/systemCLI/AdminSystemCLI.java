@@ -2,7 +2,6 @@ package assignments.assignment3.systemCLI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 import assignments.assignment3.MainMenu;
 import assignments.assignment2.Menu;
