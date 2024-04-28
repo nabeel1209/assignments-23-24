@@ -13,7 +13,8 @@ public class Order {
     private Restaurant restaurant;
     private ArrayList<Menu> items;
     public boolean orderFinished;
-    private int totalBiaya;
+    private long totalBiaya;
+    public boolean statusBayar = false;
 
     // TODO: buat constructor untuk class ini
     public Order(String orderId, String tanggal, int ongkir, Restaurant resto, ArrayList<Menu> items){
@@ -41,7 +42,7 @@ public class Order {
     public ArrayList<Menu> getItems(){
         return this.items;
     }
-    public int getTotalBiaya(){
+    public long getTotalBiaya(){
         return this.totalBiaya;
     }
 

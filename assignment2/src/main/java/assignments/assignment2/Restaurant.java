@@ -8,6 +8,7 @@ public class Restaurant {
      // Menggunakan modifier public karena data restoran dapat dilihat oleh semua orang
     public String namaRestoran;
     public ArrayList<Menu> menu = new ArrayList<Menu>();
+    private long saldo;
     
     // TODO: buat constructor untuk class ini
     public Restaurant(){}
@@ -15,11 +16,18 @@ public class Restaurant {
         this.namaRestoran = nama;
     }
 
+    public long getSaldoResto(){
+        return this.saldo;
+    }
+    public void setSaldoResto(long newSaldo){
+        this.saldo = newSaldo;
+    }
     // TODO: tambahkan methods yang diperlukan untuk class ini
     // Membuat method addMenu untuk menambahkan menu baru pada restoran
     public void addMenu(Menu newMenu){
         this.menu.add(newMenu);
     }
+
     public void sortMenu(){
         for (int i = 0; i<menu.size(); i++){
             for (int j = i+1; j<menu.size(); j++){

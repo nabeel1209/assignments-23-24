@@ -4,22 +4,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import assignments.assignment2.Restaurant;
-import assignments.assignment2.User;
-<<<<<<< HEAD
-import assignments.assignment3.LoginManager;
-=======
-import assignments.assignment3.LoginManager
+// import assignments.assignment2.User;
 import assignments.assignment3.payment.CreditCardPayment;
 import assignments.assignment3.payment.DebitPayment;
->>>>>>> 1285504d2decc6c014c883956975c97d285a0497
 import assignments.assignment3.systemCLI.AdminSystemCLI;
 import assignments.assignment3.systemCLI.CustomerSystemCLI;
+import assignments.assignment3.systemCLI.UserSystemCLI;
 
 public class MainMenu {
     private final Scanner input;
     private final LoginManager loginManager;
-    private static ArrayList<Restaurant> restoList;
+    private static ArrayList<Restaurant> restoList = new ArrayList<>();
     private static ArrayList<User> userList;
+    private static User userLoggedIn;
 
     public MainMenu(Scanner in, LoginManager loginManager) {
         this.input = in;
@@ -33,6 +30,7 @@ public class MainMenu {
 
     public void run(){
         printHeader();
+        initUser();
         boolean exit = false;
         while (!exit) {
             startMenu();
@@ -54,12 +52,22 @@ public class MainMenu {
         String nama = input.nextLine();
         System.out.print("Nomor Telepon: ");
         String noTelp = input.nextLine();
-
+        userLoggedIn = null; 
+        for(User user:userList){
+            if(user.getNoTelepon().equals(noTelp) && user.getName().equals(nama)){
+                userLoggedIn = user;
+            }
+        }
         // TODO: Validasi input login
-
-        User userLoggedIn; // TODO: lengkapi
-
-        loginManager.getSystem(userLoggedIn.role);
+        if(userLoggedIn == null){
+            System.out.println("Pengguna dengan data tersebut tidak ditemukan!");
+            login();
+            return;
+        }
+        // TODO: lengkapi
+        UserSystemCLI system = loginManager.getSystem(userLoggedIn.role);
+        System.out.println("Selamat Datang "+nama+"!");
+        system.run();
     }
 
     private static void printHeader(){
@@ -95,4 +103,21 @@ public class MainMenu {
         userList.add(new User("Admin", "123456789", "admin@gmail.com", "-", "Admin", new CreditCardPayment(), 0));
         userList.add(new User("Admin Baik", "9123912308", "admin.b@gmail.com", "-", "Admin", new CreditCardPayment(), 0));
     }
+
+    public static ArrayList<Restaurant> getRestaurants(){
+        return restoList;
+    }
+
+    public static void addRestaurant(Restaurant resto){
+        restoList.add(resto);
+    }
+
+    public static void removeRestaurant(Restaurant resto){
+        restoList.remove(resto);
+    }
+
+    public static User getUserLoggedIn(){
+        return userLoggedIn;
+    }
+
 }
