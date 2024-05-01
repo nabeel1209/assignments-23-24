@@ -37,7 +37,7 @@ public class MainMenu {
             input.nextLine();
             switch (choice) {
                 case 1 -> login();
-                case 2 -> exit = true;
+                case 2 -> {System.out.println("Terima kasih telah menggunakan DepeFood!");exit = true;}
                 default -> System.out.println("Pilihan tidak valid, silakan coba lagi.");
             }
         }
@@ -45,6 +45,7 @@ public class MainMenu {
         input.close();
     }
 
+    // Metode untuk menampilkan menu login
     private void login(){
         System.out.println("\nSilakan Login:");
         System.out.print("Nama: ");
@@ -57,13 +58,15 @@ public class MainMenu {
                 userLoggedIn = user;
             }
         }
-        // TODO: Validasi input login
+        
+        // Validasi input login
         if(userLoggedIn == null){
             System.out.println("Pengguna dengan data tersebut tidak ditemukan!");
             login();
             return;
         }
-        // TODO: lengkapi
+        
+        // Menentukan system yang dipakai oleh program sesuai dengan login manager 
         UserSystemCLI system = loginManager.getSystem(userLoggedIn.role);
         System.out.println("Selamat Datang "+nama+"!");
         system.run();
@@ -92,7 +95,7 @@ public class MainMenu {
     public static void initUser(){
         userList = new ArrayList<User>();
 
-        //TODO: Adjust constructor dan atribut pada class User di Assignment 2
+        
         userList.add(new User("Thomas N", "9928765403", "thomas.n@gmail.com", "P", "Customer", new DebitPayment(), 500000));
         userList.add(new User("Sekar Andita", "089877658190", "dita.sekar@gmail.com", "B", "Customer", new CreditCardPayment(), 2000000));
         userList.add(new User("Sofita Yasusa", "084789607222", "sofita.susa@gmail.com", "T", "Customer", new DebitPayment(), 750000));
@@ -103,18 +106,22 @@ public class MainMenu {
         userList.add(new User("Admin Baik", "9123912308", "admin.b@gmail.com", "-", "Admin", new CreditCardPayment(), 0));
     }
 
+    // Method untuk mengambil reference dari restolist milik MainMenu
     public static ArrayList<Restaurant> getRestaurants(){
         return restoList;
     }
 
+    // Method untuk menambahkan restaurant pada restoList milik MainMenu
     public static void addRestaurant(Restaurant resto){
         restoList.add(resto);
     }
 
+    // Method untuk menghapus restaurant pada restoList milik MainMenu
     public static void removeRestaurant(Restaurant resto){
         restoList.remove(resto);
     }
 
+    // Method untuk mengambil reference dari userLoggedIn milik MainMenu
     public static User getUserLoggedIn(){
         return userLoggedIn;
     }

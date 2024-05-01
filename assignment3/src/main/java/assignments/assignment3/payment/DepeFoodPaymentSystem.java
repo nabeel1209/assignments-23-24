@@ -1,9 +1,9 @@
 package assignments.assignment3.payment;
 
 public interface DepeFoodPaymentSystem {
-    //TODO implementasikan interface di sini
-    // Atribut harap mengikuti dokumen soal
+    // Atribut mengikuti soal
     public long saldo = 0;
-    // Anda dibebaskan untuk membuat method yang diperlukan
+    
+    // Abstracty method untuk memproses payment
     public long processPayment(long amount);
 }
