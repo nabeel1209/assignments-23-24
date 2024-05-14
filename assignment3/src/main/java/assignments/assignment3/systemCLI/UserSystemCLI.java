@@ -13,15 +13,11 @@ import assignments.assignment3.Restaurant;
 import assignments.assignment3.User;
 
 public abstract class UserSystemCLI {
-<<<<<<< HEAD
-    protected Scanner input = new Scanner(System.in);
-=======
     protected Scanner input;
     protected ArrayList<Restaurant> restoList;
     protected ArrayList<User> userList;
     protected User userLoggedIn;
 
->>>>>>> 2de87934941926ea08452f88727b4221a5edf9d5
     public void run() {
         boolean isLoggedIn = true;
         while (isLoggedIn) {
