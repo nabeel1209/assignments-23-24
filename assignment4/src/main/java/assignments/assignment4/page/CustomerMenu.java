@@ -161,24 +161,24 @@ public class CustomerMenu extends MemberMenu {
         Label labelTambahPesanan = new Label("Buat Pesanan");
         labelTambahPesanan.setFont(Font.loadFont(fontIntegral, 25));
         labelTambahPesanan.setTextFill(Color.WHITE);
-        labelTambahPesanan.setPadding(new Insets(0, 0, 50, 0));
+        labelTambahPesanan.setPadding(new Insets(0, 0, 30, 0));
 
         // Box untuk input dan label
         GridPane inputBox = new GridPane(40, 15);
         
         Label namaRestoLabel = new Label("Nama Restoran");
-        namaRestoLabel.setFont(Font.loadFont(fontIntegral, 13));
+        namaRestoLabel.setFont(Font.loadFont(fontIntegral, 15));
         namaRestoLabel.setTextFill(Color.WHITE);
 
         ComboBox<String> listResto = new ComboBox<>();
         for (Restaurant x:DepeFood.getRestoList()){
             listResto.getItems().add(x.getNama());
         }
-        listResto.setMinWidth(80);
+        listResto.setMinWidth(200);
         listResto.setPromptText("Pilih Restoran");
 
         Label tanggalLabel = new Label("Tanggal (DD/MM/YYYY)");
-        tanggalLabel.setFont(Font.loadFont(fontIntegral, 13));
+        tanggalLabel.setFont(Font.loadFont(fontIntegral, 15));
         tanggalLabel.setTextFill(Color.WHITE);
 
         TextField tanggalInput = new TextField();
@@ -302,7 +302,7 @@ public class CustomerMenu extends MemberMenu {
 
         ComboBox<String> listPembayaran = new ComboBox<>();
         listPembayaran.getItems().addAll(new String("Credit Card"), new String("Debit"));
-        listPembayaran.setMinWidth(80);
+        listPembayaran.setMinWidth(200);
         listPembayaran.setPromptText("Pilih Opsi Pembayaran");
 
         // Box untuk button
@@ -348,7 +348,7 @@ public class CustomerMenu extends MemberMenu {
         String output = DepeFood.getUserLoggedIn().getNama()+"\n"+"Saldo:       "+DepeFood.getUserLoggedIn().getSaldo();
 
         Label labelOutput= new Label(output);
-        labelOutput.setFont(Font.loadFont(fontIntegral, 20));
+        labelOutput.setFont(Font.loadFont(fontIntegral, 22));
         labelOutput.setTextFill(Color.WHITE);
 
         // Button kembali untuk kembali ke page sebelumnya

@@ -38,7 +38,7 @@ public class LoginForm {
     // Method untuk menampilkan komponen form login
     private Scene createLoginForm() {
         GridPane grid = new GridPane();
-        grid.setPadding(new Insets(190, 20, 30, 20));
+        grid.setPadding(new Insets(160, 20, 30, 20));
         grid.setAlignment(Pos.TOP_CENTER);
 
         // Logo
@@ -50,15 +50,17 @@ public class LoginForm {
         logoBox.setAlignment(Pos.TOP_CENTER);
         logoBox.getChildren().add(image);
         
-        // Text Welcome
-        Text welcome = new Text("Welcome to DepeFood");
+        // Label Welcome
+        Label welcome = new Label("Welcome to DepeFood");
         welcome.setFont(Font.loadFont(fontIntegral, 30));
-        welcome.setFill(Color.WHITE);
+        welcome.setTextFill(Color.WHITE);
+        welcome.setPadding(new Insets(10,0,10,0));
 
         // Login Form Box
         GridPane loginBox = new GridPane();
         loginBox.setVgap(10);
         loginBox.setPadding(new Insets(30, 0, 0, 0));
+        loginBox.setAlignment(Pos.TOP_CENTER);
         
         // Label Name
         Label nama = new Label("Name");
@@ -76,12 +78,14 @@ public class LoginForm {
         nameInput = new TextField();
         nameInput.setMinSize(220, 15);
         nameInput.setFont(Font.loadFont(fontMazzard, 15));
+        nameInput.setPromptText("Masukkan nama user");
         
         // Input No Telp
         phoneInput = new TextField();
         phoneInput.setMinSize(220, 15);
         phoneInput.setFont(Font.loadFont(fontMazzard, 15));
-        
+        phoneInput.setPromptText("Masukkan nomor telepon user");
+
         // Button box
         HBox buttonBox = new HBox(10);
         Button loginButton = new Button("Login!");

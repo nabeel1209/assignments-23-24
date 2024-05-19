@@ -143,6 +143,7 @@ public class AdminMenu extends MemberMenu{
         TextField inputNamaResto = new TextField();
         inputNamaResto.setMinSize(220, 15);
         inputNamaResto.setFont(Font.loadFont(fontMazzard, 15));
+        inputNamaResto.setPromptText("Masukkan nama restoran");
 
         // Box untuk button
         HBox buttonBox = new HBox(10);
@@ -182,7 +183,7 @@ public class AdminMenu extends MemberMenu{
         layout.setPadding(new Insets(30, 30,0,30));
         
         // Label tambah menu restoran
-        Label labelTambahMenuResto = new Label("Tambah Restoran");
+        Label labelTambahMenuResto = new Label("Tambah Menu Restoran");
         labelTambahMenuResto.setFont(Font.loadFont(fontIntegral, 25));
         labelTambahMenuResto.setTextFill(Color.WHITE);
         labelTambahMenuResto.setPadding(new Insets(0,0,80,0));
@@ -255,7 +256,7 @@ public class AdminMenu extends MemberMenu{
         layout.setPadding(new Insets(30, 30,0,30));
         
         // Label lihat restoran
-        Label labelLihatResto = new Label("Tambah Restoran");
+        Label labelLihatResto = new Label("Lihat Restoran");
         labelLihatResto.setFont(Font.loadFont(fontIntegral, 25));
         labelLihatResto.setTextFill(Color.WHITE);
         labelLihatResto.setPadding(new Insets(0,0,80,0));
@@ -270,7 +271,7 @@ public class AdminMenu extends MemberMenu{
         for (Restaurant x:DepeFood.getRestoList()){
             listResto.getItems().add(x.getNama());
         }
-        listResto.setMinWidth(80);
+        listResto.setMinWidth(200);
         listResto.setPromptText("Pilih Restoran");
         listResto.getEditor().setFont(Font.loadFont(fontIntegral, 13));
         namaRestoBox.getChildren().addAll(namaRestoLabel, listResto);
