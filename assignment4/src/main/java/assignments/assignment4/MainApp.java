@@ -35,8 +35,6 @@ public class MainApp extends Application {
 
         // Populate all scenes map
         allScenes.put("Login", loginScene);
-        // allScenes.put("Customer Menu", baseCustomer);
-        // allScenes.put("Admin Menu", baseAdmin);
 
         // Set the initial scene of the application to the login scene
         setScene(loginScene);

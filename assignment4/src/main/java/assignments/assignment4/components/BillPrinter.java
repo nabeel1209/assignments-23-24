@@ -2,19 +2,14 @@ package assignments.assignment4.components;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import assignments.assignment1.OrderGenerator;
 import assignments.assignment3.DepeFood;
 import assignments.assignment3.Menu;
 import assignments.assignment3.Order;
@@ -42,17 +37,21 @@ public class BillPrinter {
         layout.setAlignment(Pos.TOP_LEFT);
         layout.setPadding(new Insets(30, 30, 0, 30));
 
+        // Label cetak bill
         Label labelCetakBill = new Label("Cetak Bill");
         labelCetakBill.setFont(Font.loadFont(fontIntegral, 25));
         labelCetakBill.setTextFill(Color.WHITE);
         labelCetakBill.setPadding(new Insets(0, 0, 40, 0));
         
+        // Button untuk kebali ke page sebelumnya
         Button kembali = new Button("Kembali");
         kembali.setFont(Font.loadFont(fontIntegral, 15));
         kembali.setTextFill(Color.WHITE);
         kembali.setStyle("-fx-background-color: #f60506; ");
 
+        // Validasi orderid
         printBill(orderID);
+
         Label orderValidasi = new Label(bill);
         if(bill.equals("OrderID tidak valid")){
             orderValidasi.setFont(Font.loadFont(fontIntegral, 20));
@@ -71,6 +70,7 @@ public class BillPrinter {
     private void printBill(String orderId) {
         //TODO: Implementasi validasi orderID
         Order order = null;
+        // Cek order pada order history user
         for(int i = 0;i<DepeFood.getUserLoggedIn().getOrderHistory().size();i++){
             if(orderId.equals(DepeFood.getUserLoggedIn().getOrderHistory().get(i).getOrderId())){
                 order = DepeFood.getUserLoggedIn().getOrderHistory().get(i);

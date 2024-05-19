@@ -1,8 +1,5 @@
 package assignments.assignment4.page;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,11 +21,8 @@ import assignments.assignment3.Restaurant;
 import assignments.assignment3.User;
 import assignments.assignment4.MainApp;
 import assignments.assignment4.components.BillPrinter;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 public class CustomerMenu extends MemberMenu {
@@ -39,10 +33,7 @@ public class CustomerMenu extends MemberMenu {
     private Scene payBillScene;
     private Scene cekSaldoScene;
     private BillPrinter billPrinter; // Instance of BillPrinter
-    private ComboBox<String> restaurantComboBox = new ComboBox<>();
-    private static Label label = new Label();
     private MainApp mainApp;
-    private List<Restaurant> restoList = new ArrayList<>();
     private User user;
     private String localDir = System.getProperty("user.dir");
     private String fontIntegral = "file:\\" + localDir + "\\resources\\font\\IntegralCF-Medium.ttf";
@@ -61,9 +52,9 @@ public class CustomerMenu extends MemberMenu {
         this.cekSaldoScene = createCekSaldoScene();
     }
 
+    // Method ini untuk menampilkan menu untuk Customer
     @Override
     public Scene createBaseMenu() {
-        // TODO: Implementasikan method ini untuk menampilkan menu untuk Customer
         VBox menuLayout = new VBox(10);
         menuLayout.setStyle("-fx-background-color: #1e1b2f; ");
         menuLayout.setAlignment(Pos.TOP_LEFT);
@@ -142,12 +133,14 @@ public class CustomerMenu extends MemberMenu {
         cekSaldo.setStyle("-fx-background-color: #2931ea; ");
         cekSaldoBox.getChildren().addAll(imageViewCekSaldo, cekSaldo);
 
+        // Setting untuk grid pane
         GridPane.setConstraints(buatPesananBox, 0, 0);
         GridPane.setConstraints(cetakBillBox, 1, 0);
         GridPane.setConstraints(bayarBillBox, 0, 1);
         GridPane.setConstraints(cekSaldoBox, 1, 1);
         gridButton.getChildren().addAll(buatPesananBox, cetakBillBox, bayarBillBox, cekSaldoBox);
 
+        // Set action untuk button
         buatPesanan.setOnAction(Event -> mainApp.setScene(createTambahPesananForm()));
         cetakBill.setOnAction(Event -> {mainApp.setScene(createBillPrinter());mainApp.addScene("Cetak Bill", createBillPrinter());});
         bayarBill.setOnAction(Event -> mainApp.setScene(createBayarBillForm()));
@@ -157,8 +150,8 @@ public class CustomerMenu extends MemberMenu {
         return new Scene(menuLayout, 500, 700);
     }
 
+    // Method ini untuk menampilkan page tambah pesanan
     private Scene createTambahPesananForm() {
-        // TODO: Implementasikan method ini untuk menampilkan page tambah pesanan
         VBox layout = new VBox(10);
         layout.setStyle("-fx-background-color: #1e1b2f; ");
         layout.setAlignment(Pos.TOP_LEFT);
@@ -170,9 +163,9 @@ public class CustomerMenu extends MemberMenu {
         labelTambahPesanan.setTextFill(Color.WHITE);
         labelTambahPesanan.setPadding(new Insets(0, 0, 50, 0));
 
-        // Box Input
+        // Box untuk input dan label
         GridPane inputBox = new GridPane(40, 15);
-        // HBox untuk nama restoran
+        
         Label namaRestoLabel = new Label("Nama Restoran");
         namaRestoLabel.setFont(Font.loadFont(fontIntegral, 13));
         namaRestoLabel.setTextFill(Color.WHITE);
@@ -183,9 +176,7 @@ public class CustomerMenu extends MemberMenu {
         }
         listResto.setMinWidth(80);
         listResto.setPromptText("Pilih Restoran");
-        listResto.getEditor().setFont(Font.loadFont(fontIntegral, 13));
 
-        // Box tanggal
         Label tanggalLabel = new Label("Tanggal (DD/MM/YYYY)");
         tanggalLabel.setFont(Font.loadFont(fontIntegral, 13));
         tanggalLabel.setTextFill(Color.WHITE);
@@ -193,6 +184,7 @@ public class CustomerMenu extends MemberMenu {
         TextField tanggalInput = new TextField();
         tanggalInput.setFont(Font.loadFont(fontMazzard, 15));
         tanggalInput.setPromptText("Masukkan tanggal (DD/MM/YYYY)");
+        
         GridPane.setConstraints(namaRestoLabel, 0, 0);
         GridPane.setConstraints(listResto, 1, 0);
         GridPane.setConstraints(tanggalLabel, 0, 1);
@@ -204,6 +196,7 @@ public class CustomerMenu extends MemberMenu {
         menuButton.setTextFill(Color.WHITE);
         menuButton.setStyle("-fx-background-color: #2931ea; ");
 
+        // Box untuk list view
         VBox listMenuBox = new VBox(10);
         listMenuBox.setAlignment(Pos.TOP_CENTER);
         Label listMenuLabel = new Label("Menu");
@@ -213,6 +206,7 @@ public class CustomerMenu extends MemberMenu {
         listMenu.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         listMenuBox.getChildren().addAll(listMenuLabel, listMenu);
 
+        // Box untuk button
         HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.TOP_LEFT);
         Button buatPesanan = new Button("Buat Pesanan");
@@ -224,6 +218,7 @@ public class CustomerMenu extends MemberMenu {
         kembali.setTextFill(Color.WHITE);
         kembali.setStyle("-fx-background-color: #f60506; ");
 
+        // Set action untuk button
         buttonBox.getChildren().addAll(buatPesanan, kembali);
         menuButton.setOnAction(Event->{listMenu.getItems().clear();for(Menu x: DepeFood.getRestaurantByName(listResto.getValue()).getMenu()){
             listMenu.getItems().add(x.getNamaMakanan());
@@ -234,9 +229,9 @@ public class CustomerMenu extends MemberMenu {
         layout.getChildren().addAll(labelTambahPesanan, inputBox, menuButton, listMenuBox, buttonBox);
         return new Scene(layout, 500, 700);
     }
-
+    
+    // Method ini untuk menampilkan page cetak bill
     private Scene createBillPrinter() {
-        // TODO: Implementasikan method ini untuk menampilkan page cetak bill
         VBox layout = new VBox(10);
         layout.setStyle("-fx-background-color: #1e1b2f; ");
         layout.setAlignment(Pos.TOP_LEFT);
@@ -247,6 +242,7 @@ public class CustomerMenu extends MemberMenu {
         labelCetakBill.setTextFill(Color.WHITE);
         labelCetakBill.setPadding(new Insets(0, 0, 80, 0));
 
+        // Box untuk input dan label
         GridPane inputBox = new GridPane(40, 20);
         Label orderIDLabel = new Label("OrderID");
         orderIDLabel.setFont(Font.loadFont(fontIntegral, 15));
@@ -255,6 +251,7 @@ public class CustomerMenu extends MemberMenu {
         orderIDInput.setPromptText("Masukkan Order ID");
         orderIDInput.setFont(Font.loadFont(fontMazzard, 15));
 
+        // Box untuk button
         HBox buttonBox = new HBox(10);
         Button printBill = new Button("Print Bill");
         printBill.setFont(Font.loadFont(fontIntegral, 15));
@@ -266,6 +263,7 @@ public class CustomerMenu extends MemberMenu {
         kembali.setStyle("-fx-background-color: #f60506; ");
         buttonBox.getChildren().addAll(printBill, kembali);
 
+        // Setting untuk grid pane
         GridPane.setConstraints(orderIDLabel, 0, 0);
         GridPane.setConstraints(orderIDInput, 1, 0);
         GridPane.setConstraints(buttonBox, 1, 1);
@@ -277,9 +275,8 @@ public class CustomerMenu extends MemberMenu {
         layout.getChildren().addAll(labelCetakBill, inputBox);
         return new Scene(layout, 500, 700);
     }
-
+    // Method ini untuk menampilkan page bayar bill
     private Scene createBayarBillForm() {
-        // TODO: Implementasikan method ini untuk menampilkan page bayar bill
         VBox layout = new VBox(10);
         layout.setStyle("-fx-background-color: #1e1b2f; ");
         layout.setAlignment(Pos.TOP_LEFT);
@@ -290,6 +287,7 @@ public class CustomerMenu extends MemberMenu {
         labelBayarBill.setTextFill(Color.WHITE);
         labelBayarBill.setPadding(new Insets(0, 0, 80, 0));
 
+        // Box untuk input
         GridPane inputBox = new GridPane(40, 20);
         Label orderIDLabel = new Label("OrderID");
         orderIDLabel.setFont(Font.loadFont(fontIntegral, 15));
@@ -306,8 +304,8 @@ public class CustomerMenu extends MemberMenu {
         listPembayaran.getItems().addAll(new String("Credit Card"), new String("Debit"));
         listPembayaran.setMinWidth(80);
         listPembayaran.setPromptText("Pilih Opsi Pembayaran");
-        // listPembayaran.getEditor().setFont(Font.loadFont(fontIntegral, 13));
 
+        // Box untuk button
         HBox buttonBox = new HBox(10);
         Button bayar = new Button("Bayar");
         bayar.setFont(Font.loadFont(fontIntegral, 15));
@@ -319,10 +317,11 @@ public class CustomerMenu extends MemberMenu {
         kembali.setStyle("-fx-background-color: #f60506; ");
         buttonBox.getChildren().addAll(bayar, kembali);
 
-
+        // Set action untuk button
         bayar.setOnAction(Event->handleBayarBill(orderIDInput.getText(), (listPembayaran.getValue().equals("Debit"))?1:0));
         kembali.setOnAction(Event->mainApp.setScene(scene));
 
+        // Setting untuk grid pane
         GridPane.setConstraints(orderIDLabel, 0, 0);
         GridPane.setConstraints(orderIDInput, 1, 0);
         GridPane.setConstraints(opsiPembayaranLabel, 0, 1);
@@ -335,7 +334,7 @@ public class CustomerMenu extends MemberMenu {
     }
 
     private Scene createCekSaldoScene() {
-        // TODO: Implementasikan method ini untuk menampilkan page cetak saldo
+        // Method ini untuk menampilkan page cetak saldo
         VBox layout = new VBox(40);
         layout.setStyle("-fx-background-color: #1e1b2f; ");
         layout.setAlignment(Pos.TOP_LEFT);
@@ -352,19 +351,21 @@ public class CustomerMenu extends MemberMenu {
         labelOutput.setFont(Font.loadFont(fontIntegral, 20));
         labelOutput.setTextFill(Color.WHITE);
 
+        // Button kembali untuk kembali ke page sebelumnya
         Button kembali = new Button("Kembali");
         kembali.setFont(Font.loadFont(fontIntegral, 15));
         kembali.setTextFill(Color.WHITE);
         kembali.setStyle("-fx-background-color: #f60506; ");
 
+        // Set action untuk button
         kembali.setOnAction(Event->mainApp.setScene(scene));
 
         layout.getChildren().addAll(labelCekSaldo, labelOutput, kembali);
         return new Scene(layout, 500, 700);
     }
 
+    // Validasi isian pesanan
     private void handleBuatPesanan(String namaRestoran, String tanggalPemesanan, List<String> menuItems) {
-        // TODO: Implementasi validasi isian pesanan
         if(namaRestoran.isBlank()){
             showAlert("Gagal membuat pesanan!", "Nama restoran kosong", "Harap masukkan nama restoran", AlertType.ERROR);
             return;
@@ -392,8 +393,8 @@ public class CustomerMenu extends MemberMenu {
         showAlert("Berhasil membuat pesanan", "Order dengan ID "+orderID+" berhasil ditambahkan", "", AlertType.INFORMATION);
     }
 
+    // Validasi pembayaran
     private void handleBayarBill(String orderID, int pilihanPembayaran) {
-        // TODO: Implementasi validasi pembayaran
         Order order = null;
         for(int i = 0;i<DepeFood.getUserLoggedIn().getOrderHistory().size();i++){
             if(orderID.equals(DepeFood.getUserLoggedIn().getOrderHistory().get(i).getOrderId())){

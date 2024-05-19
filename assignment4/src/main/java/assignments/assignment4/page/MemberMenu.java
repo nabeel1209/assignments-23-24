@@ -17,7 +17,7 @@ public abstract class MemberMenu {
         alert.setHeaderText(header);
         alert.setContentText(content);
         Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-        alertStage.getIcons().add(new Image(logo));
+        alertStage.getIcons().add(new Image(logo)); // Mengubah icon sesuai dengan icon main program
         alert.showAndWait();
     }
 

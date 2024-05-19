@@ -1,36 +1,22 @@
 package assignments.assignment4.components.form;
 
 import assignments.assignment3.DepeFood;
-import assignments.assignment3.LoginManager;
 import assignments.assignment3.User;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import assignments.assignment4.MainApp;
 import assignments.assignment4.page.AdminMenu;
 import assignments.assignment4.page.CustomerMenu;
-
-// import java.io.File;
-// import java.io.InputStream;
-// import java.nio.charset.MalformedInputException;
-// import java.io.FileInputStream;
-// import java.io.FileNotFoundException;
-import java.util.function.Consumer;
 import javafx.scene.image.*;
-import javafx.scene.Group;
-import javafx.scene.shape.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.*;
 
@@ -49,8 +35,8 @@ public class LoginForm {
         this.mainApp = mainApp; // Store MainApp instance
     }
 
+    // Method untuk menampilkan komponen form login
     private Scene createLoginForm() {
-        //TODO: Implementasi method untuk menampilkan komponen form login
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(190, 20, 30, 20));
         grid.setAlignment(Pos.TOP_CENTER);
@@ -96,7 +82,7 @@ public class LoginForm {
         phoneInput.setMinSize(220, 15);
         phoneInput.setFont(Font.loadFont(fontMazzard, 15));
         
-        // Login Button
+        // Button box
         HBox buttonBox = new HBox(10);
         Button loginButton = new Button("Login!");
         loginButton.setTextFill(Color.WHITE);
@@ -127,9 +113,8 @@ public class LoginForm {
         return new Scene(grid, 500, 700);
     }
 
-
+    // Validasi isian form login
     private void handleLogin() {
-        //TODO: Implementasi validasi isian form login
         String nama = nameInput.getText();
         String noTelp = phoneInput.getText();
         if(nama.isBlank() || noTelp.isBlank()){
@@ -141,6 +126,7 @@ public class LoginForm {
             notValidAlert.show();
             return;
         }
+        
         // Validasi noTelp
         try{
             long telpInt = Long.parseLong(noTelp);

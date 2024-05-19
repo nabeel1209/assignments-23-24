@@ -3,18 +3,12 @@ package assignments.assignment3;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
-
 import assignments.assignment1.OrderGenerator;
 import assignments.assignment3.payment.CreditCardPayment;
 import assignments.assignment3.payment.DebitPayment;
 import assignments.assignment3.payment.DepeFoodPaymentSystem;
-import assignments.assignment3.systemCLI.AdminSystemCLI;
-import assignments.assignment3.systemCLI.CustomerSystemCLI;
-import assignments.assignment3.systemCLI.UserSystemCLI;
 
 public class DepeFood {
     private static ArrayList<User> userList;

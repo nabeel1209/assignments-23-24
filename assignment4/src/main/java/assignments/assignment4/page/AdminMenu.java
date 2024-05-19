@@ -30,13 +30,9 @@ public class AdminMenu extends MemberMenu{
     private Scene addRestaurantScene;
     private Scene addMenuScene;
     private Scene viewRestaurantsScene;
-    // private List<Restaurant> restoList = new ArrayList<>();
     private MainApp mainApp; // Reference to MainApp instance
-    // private ComboBox<String> restaurantComboBox = new ComboBox<>();
-    // private ListView<String> menuItemsListView = new ListView<>();
     private String localDir = System.getProperty("user.dir");
     private String fontIntegral = "file:\\"+localDir+"\\resources\\font\\IntegralCF-Medium.ttf";
-    // private String logo = "file:\\"+localDir+"\\resources\\logo\\LOGO.png";
     private String fontMazzard = "file:\\"+localDir+"\\resources\\font\\mazzardsoftl.otf";
     private String folderImage = "file:\\"+localDir+"\\resources\\buttonImage\\";
 
@@ -50,9 +46,9 @@ public class AdminMenu extends MemberMenu{
         this.viewRestaurantsScene = createViewRestaurantsForm();
     }
 
+    // Method ini untuk menampilkan menu untuk Admin
     @Override
     public Scene createBaseMenu() {
-        // TODO: Implementasikan method ini untuk menampilkan menu untuk Admin
         VBox menuLayout = new VBox(40);
         menuLayout.setStyle("-fx-background-color: #1e1b2f; ");
         menuLayout.setAlignment(Pos.TOP_LEFT);
@@ -125,8 +121,8 @@ public class AdminMenu extends MemberMenu{
         return new Scene(menuLayout, 500, 700);
     }
 
+    // Method ini untuk menampilkan page tambah restoran
     private Scene createAddRestaurantForm() {
-        // TODO: Implementasikan method ini untuk menampilkan page tambah restoran
         VBox layout = new VBox(10);
         layout.setStyle("-fx-background-color: #1e1b2f; ");
         layout.setAlignment(Pos.TOP_LEFT);
@@ -148,23 +144,29 @@ public class AdminMenu extends MemberMenu{
         inputNamaResto.setMinSize(220, 15);
         inputNamaResto.setFont(Font.loadFont(fontMazzard, 15));
 
+        // Box untuk button
         HBox buttonBox = new HBox(10);
+        
+        // Button submit untuk proses data
         Button submit = new Button("Submit");
         submit.setFont(Font.loadFont(fontIntegral, 15));
         submit.setTextFill(Color.WHITE);
         submit.setStyle("-fx-background-color: #2931ea; ");
 
+        // Button kembali untuk kembali ke page sebelumnya
         Button kembali = new Button("Kembali");
         kembali.setFont(Font.loadFont(fontIntegral, 15));
         kembali.setTextFill(Color.WHITE);
         kembali.setStyle("-fx-background-color: #f60506; ");
         buttonBox.getChildren().addAll(submit, kembali);
 
+        // Setting untuk grid pane
         GridPane.setConstraints(namaRestoLabel, 0, 0);
         GridPane.setConstraints(inputNamaResto, 1, 0);
         GridPane.setConstraints(buttonBox, 1, 1);
         tambahRestoPane.getChildren().addAll(namaRestoLabel, inputNamaResto, buttonBox);
 
+        // Set action untuk button
         submit.setOnAction(Event->handleTambahRestoran(inputNamaResto.getText()));
         kembali.setOnAction(Event->mainApp.setScene(scene));
 
@@ -172,8 +174,8 @@ public class AdminMenu extends MemberMenu{
         return new Scene(layout, 500, 700);
     }
 
+    // Method ini untuk menampilkan page tambah menu restoran
     private Scene createAddMenuForm() {
-        // TODO: Implementasikan method ini untuk menampilkan page tambah menu restoran
         VBox layout = new VBox(20);
         layout.setStyle("-fx-background-color: #1e1b2f; ");
         layout.setAlignment(Pos.TOP_LEFT);
@@ -211,18 +213,23 @@ public class AdminMenu extends MemberMenu{
         hargaInput.setPromptText("Masukkan harga menu");
         hargaInput.setFont(Font.loadFont(fontMazzard, 15));
 
+        // Box untuk button
         HBox buttonBox = new HBox(10);
+        
+        // Button add menu untuk proses data
         Button addMenu = new Button("Tambah menu");
         addMenu.setFont(Font.loadFont(fontIntegral, 15));
         addMenu.setTextFill(Color.WHITE);
         addMenu.setStyle("-fx-background-color: #2931ea; ");
 
+        // Button kembali untuk kembali ke page sebelumnya
         Button kembali = new Button("Kembali");
         kembali.setFont(Font.loadFont(fontIntegral, 15));
         kembali.setTextFill(Color.WHITE);
         kembali.setStyle("-fx-background-color: #f60506; ");
         buttonBox.getChildren().addAll(addMenu, kembali);
 
+        // Setting untuk grid pane
         GridPane.setConstraints(namaRestoLabel, 0, 0);
         GridPane.setConstraints(restoInput, 1, 0);
         GridPane.setConstraints(namaMenuLabel, 0, 1);
@@ -231,6 +238,7 @@ public class AdminMenu extends MemberMenu{
         GridPane.setConstraints(hargaInput, 1, 2);
         GridPane.setConstraints(buttonBox, 1, 3);
 
+        // Set action untuk button
         addMenu.setOnAction(Event->handleTambahMenuRestoran(DepeFood.getRestaurantByName(restoInput.getText()), namaMenuInput.getText(), hargaInput.getText()));
         kembali.setOnAction(Event->mainApp.setScene(scene));
 
@@ -239,9 +247,8 @@ public class AdminMenu extends MemberMenu{
         return new Scene(layout, 500, 700);
     }
     
-    
+    // Method ini untuk menampilkan page daftar restoran
     private Scene createViewRestaurantsForm() {
-        // TODO: Implementasikan method ini untuk menampilkan page daftar restoran
         VBox layout = new VBox(10);
         layout.setStyle("-fx-background-color: #1e1b2f; ");
         layout.setAlignment(Pos.TOP_LEFT);
@@ -268,18 +275,23 @@ public class AdminMenu extends MemberMenu{
         listResto.getEditor().setFont(Font.loadFont(fontIntegral, 13));
         namaRestoBox.getChildren().addAll(namaRestoLabel, listResto);
 
+        // Box untuk button
         HBox buttonBox = new HBox(10);
+        
+        // Button search untuk proses data
         Button search = new Button("Search");
         search.setFont(Font.loadFont(fontIntegral, 15));
         search.setTextFill(Color.WHITE);
         search.setStyle("-fx-background-color: #2931ea; ");
 
+        // Button kembali untuk kembali ke page sebelumnya
         Button kembali = new Button("Kembali");
         kembali.setFont(Font.loadFont(fontIntegral, 15));
         kembali.setTextFill(Color.WHITE);
         kembali.setStyle("-fx-background-color: #f60506; ");
         buttonBox.getChildren().addAll(search, kembali);
 
+        // Box untuk list view
         VBox listMenuBox = new VBox(20);
         listMenuBox.setAlignment(Pos.TOP_CENTER);
         Label listMenuLabel = new Label("Menu");
@@ -289,6 +301,7 @@ public class AdminMenu extends MemberMenu{
         ListView<String> listMenu = new ListView<>();
         listMenuBox.getChildren().addAll(listMenuLabel, listMenu);
 
+        // Set action untuk button
         search.setOnAction(Event->{listMenu.getItems().clear();for(Menu x: DepeFood.getRestaurantByName(listResto.getValue()).getMenu()){
             listMenu.getItems().add(x.getNamaMakanan()+" - Rp"+x.getHarga());
         }; listMenu.refresh();});
@@ -299,8 +312,8 @@ public class AdminMenu extends MemberMenu{
     }
     
 
+    // Validasi isian nama Restoran
     private void handleTambahRestoran(String nama) {
-        //TODO: Implementasi validasi isian nama Restoran
         Restaurant resto = DepeFood.getRestaurantByName(nama);
         if(resto != null){
             showAlert("Gagal menambahkan restoran!", "Restoran sudah terdaftar dalam sistem", "Masukkan nama restoran yang belum terdaftar", AlertType.ERROR);
@@ -316,8 +329,8 @@ public class AdminMenu extends MemberMenu{
         showAlert("Berhasil menambahkan restoran!", "Restoran "+nama+" berhasil ditambahkan", "", AlertType.INFORMATION);
     }
 
+    // Validasi isian menu Restoran
     private void handleTambahMenuRestoran(Restaurant restaurant, String itemName, String price) {
-        //TODO: Implementasi validasi isian menu Restoran
         double priceDouble = 0;
         if(restaurant == null){
             showAlert("Gagal menambahkan menu pada restoran!", "Restoran tidak terdaftar pada sistem ", "", AlertType.ERROR);
@@ -339,7 +352,6 @@ public class AdminMenu extends MemberMenu{
                 return;
             }
         }
-       
         DepeFood.handleTambahMenuRestoran(restaurant, itemName, priceDouble);
         showAlert("Berhasil menambahkan menu pada restoran!", "Menu "+itemName+" berhasil ditambahkan pada restoran "+ restaurant.getNama(), "", AlertType.INFORMATION);
     }
