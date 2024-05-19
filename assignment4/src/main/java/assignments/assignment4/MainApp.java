@@ -6,11 +6,11 @@ import java.util.Map;
 import assignments.assignment3.DepeFood;
 import assignments.assignment3.User;
 import assignments.assignment4.components.form.LoginForm;
-import assignments.assignment4.page.AdminMenu;
-import assignments.assignment4.page.CustomerMenu;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.image.*;
+
 
 public class MainApp extends Application {
 
@@ -24,12 +24,19 @@ public class MainApp extends Application {
         window = primaryStage;
         window.setTitle("DepeFood Ordering System");
         DepeFood.initUser(); // Initialize users
+        window.setIconified(true);
+        String localDir = System.getProperty("user.dir");
+        Image logoPNG = new Image("file:\\"+localDir+"\\resources\\logo\\LOGO.png");
+        window.getIcons().add(logoPNG);
+        window.setResizable(false);
 
         // Initialize all scenes
         Scene loginScene = new LoginForm(window, this).getScene();
 
         // Populate all scenes map
         allScenes.put("Login", loginScene);
+        // allScenes.put("Customer Menu", baseCustomer);
+        // allScenes.put("Admin Menu", baseAdmin);
 
         // Set the initial scene of the application to the login scene
         setScene(loginScene);
@@ -55,6 +62,9 @@ public class MainApp extends Application {
         allScenes.put(sceneName, scene);
     }
 
+    public Stage getStage(){
+        return window;
+    }
     public void logout() {
         setUser(null); // Clear the current user
         setScene(getScene("Login")); // Switch to the login scene

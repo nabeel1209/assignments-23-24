@@ -262,19 +262,4 @@ public class DepeFood {
     public static void setPenggunaLoggedIn(User user){
         userLoggedIn = user;
     }
-
-
-
-
-    
-
-    
-
-
-
-
-
-
-
-   
 }

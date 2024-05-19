@@ -23,6 +23,7 @@ public class Restaurant {
     }
 
     public ArrayList<Menu> getMenu() {
+        menu = sortMenu();
         return menu;
     }
 
